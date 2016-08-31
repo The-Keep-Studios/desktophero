@@ -48,7 +48,7 @@
     <body class="main">
         <nav class="navbar navbar-dark bg-inverse bg-inverse-custom navbar-fixed-top">
           <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
               <!-- TODO: Change LOGO to Desktop Hero -->
               <span class="icon-logo"></span>
             </a>
@@ -228,7 +228,7 @@
         </script>
 
         <!--3D Related Scripts -->
-        <script src="/vendor/threejs/build/three.js"></script>
+        <!--script src="/vendor/threejs/build/three.js"></script>
         <script src="/vendor/threejs/examples/js/loaders/collada/Animation.js"></script>
         <script src="/vendor/threejs/examples/js/loaders/collada/AnimationHandler.js"></script>
         <script src="/vendor/threejs/examples/js/loaders/collada/KeyFrameAnimation.js"></script>
@@ -236,7 +236,7 @@
         <script src="/vendor/threejs/examples/js/loaders/ColladaLoader.js"></script>
 
         <script src="/vendor/threejs/examples/js/Detector.js"></script>
-        <script src="/vendor/threejs/examples/js/libs/stats.min.js"></script>
+        <script src="/vendor/threejs/examples/js/libs/stats.min.js"></script-->
 
         <!--Feature Specific Scripts -->
         <script src="/js/login.js"></script>

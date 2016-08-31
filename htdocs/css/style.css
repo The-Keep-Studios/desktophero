@@ -153,4 +153,7 @@ tbody td, thead th {
 }
 
 #threejs-demo a { color: skyblue }
-        </style>
+
+.jumbotron {
+    background: #663fb5 url('../img/bg-dh.png') no-repeat scroll center bottom / cover;
+}

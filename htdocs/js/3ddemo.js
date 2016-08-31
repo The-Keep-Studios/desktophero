@@ -1,130 +1,124 @@
 $(document).ready(function(){
 
-    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
-        var container, stats;
-        var camera, scene, renderer, objects;
-        var particleLight;
-        var dae;
-        var loader = new THREE.ColladaLoader();
-        loader.options.convertUpAxis = true;
-        loader.load( '/vendor/threejs/examples/models/collada/monster/monster.dae', function ( collada ) {
+    var SCREEN_WIDTH = window.innerWidth;
+    var SCREEN_HEIGHT = window.innerHeight;
+    var container;
+    var camera, scene;
+    var renderer;
+    var mesh;
+    var mouseX = 0, mouseY = 0;
+    var windowHalfX = window.innerWidth / 2;
+    var windowHalfY = window.innerHeight / 2;
+    var clock = new THREE.Clock();
+    var gui, skinConfig, morphConfig;
+    
+    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    
+    init();
+    animate();
 
-            dae = collada.scene;
-            dae.traverse( function ( child ) {
-
-                if ( child instanceof THREE.SkinnedMesh ) {
-                    var animation = new THREE.Animation( child, child.geometry.animation );
-                    animation.play();
-                }
-
-            } );
-
-            dae.scale.x = dae.scale.y = dae.scale.z = 0.002;
-            dae.updateMatrix();
-
-            init();
-            animate();
-        } );
-
-        function init() {
-            
-            container = document.getElementById('editor');
-            camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-            camera.position.set( 2, 2, 3 );
-
-            scene = new THREE.Scene();
-
-            // Grid
-            var size = 14, step = 1;
-            var geometry = new THREE.Geometry();
-            var material = new THREE.LineBasicMaterial( { color: 0x303030 } );
-
-            for ( var i = - size; i <= size; i += step ) {
-
-                geometry.vertices.push( new THREE.Vector3( - size, - 0.04, i ) );
-                geometry.vertices.push( new THREE.Vector3(   size, - 0.04, i ) );
-
-                geometry.vertices.push( new THREE.Vector3( i, - 0.04, - size ) );
-                geometry.vertices.push( new THREE.Vector3( i, - 0.04,   size ) );
-            }
-
-            var line = new THREE.LineSegments( geometry, material );
-            scene.add( line );
-
-            // Add the COLLADA
-
-            scene.add( dae );
-
-            particleLight = new THREE.Mesh( new THREE.SphereGeometry( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) );
-            scene.add( particleLight );
-
-            // Lights
-
-            scene.add( new THREE.AmbientLight( 0xcccccc ) );
-
-            var directionalLight = new THREE.DirectionalLight(/*Math.random() * 0xffffff*/0xeeeeee );
-            directionalLight.position.x = Math.random() - 0.5;
-            directionalLight.position.y = Math.random() - 0.5;
-            directionalLight.position.z = Math.random() - 0.5;
-            directionalLight.position.normalize();
-            scene.add( directionalLight );
-
-            var pointLight = new THREE.PointLight( 0xffffff, 4 );
-            particleLight.add( pointLight );
-
-            renderer = new THREE.WebGLRenderer();
-            renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( window.innerWidth, window.innerHeight );
-            container.appendChild( renderer.domElement );
-
-            stats = new Stats();
-            container.appendChild( stats.dom );
-
-            //
-
-            window.addEventListener( 'resize', onWindowResize, false );
-
-        }
-
-        function onWindowResize() {
-
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-
-            renderer.setSize( window.innerWidth, window.innerHeight );
-
-        }
-
+    function init() {
+        container = document.getElementById( 'editor' );
+        camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 );
+        camera.position.set( 2000, 5000, 5000 );
+        scene = new THREE.Scene();
+        // LIGHTS
+        var light = new THREE.DirectionalLight( 0xffffff, 1 );
+        light.position.set( 0, 140, 500 );
+        light.position.multiplyScalar( 1.1 );
+        light.color.setHSL( 0.6, 0.075, 1 );
+        scene.add( light );
         //
-
-        function animate() {
-
-            requestAnimationFrame( animate );
-
-            render();
-            stats.update();
-
+        var light = new THREE.DirectionalLight( 0xffffff, 1 );
+        light.position.set( 0, - 1, 0 );
+        scene.add( light );
+        // RENDERER
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setClearColor( 0x000000 );
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+        container.appendChild( renderer.domElement );
+        // CHARACTER
+        character = new THREE.UCSCharacter();
+        character.onLoadComplete = function () {
+            console.log( "Load Complete" );
+            console.log( character.numSkins + " skins and " + character.numMorphs + " morphtargets loaded." );
+            gui = new dat.GUI();
+            setupSkinsGUI();
+            setupMorphsGUI();
+            gui.width = 200;
+            
+            gui.open();
+        };
+        var loader = new THREE.XHRLoader();
+        loader.load( '/vendor/threejs/examples/models/skinned/UCS_config.json', function ( text ) {
+            var config = JSON.parse( text );
+            character.loadParts( config );
+            scene.add( character.root );
+        } );
+        window.addEventListener( 'resize', onWindowResize, false );
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls.target.set( 0, 3000, 0 );
+        controls.addEventListener( 'change', render );
+    }
+    function setupSkinsGUI() {
+        var skinGui = gui.addFolder( "Skins" );
+        skinConfig = {
+            wireframe: false
+        };
+        var skinCallback = function ( index ) {
+            return function () {
+                character.setSkin( index );
+            };
+        };
+        for ( var i = 0; i < character.numSkins; i ++ ) {
+            var name = character.skins[ i ].name;
+            skinConfig[ name ] = skinCallback( i );
         }
-
-        var clock = new THREE.Clock();
-
-        function render() {
-
-            var timer = Date.now() * 0.0005;
-
-            camera.position.x = Math.cos( timer ) * 10;
-            camera.position.y = 2;
-            camera.position.z = Math.sin( timer ) * 10;
-
-            camera.lookAt( scene.position );
-
-            particleLight.position.x = Math.sin( timer * 4 ) * 3009;
-            particleLight.position.y = Math.cos( timer * 5 ) * 4000;
-            particleLight.position.z = Math.cos( timer * 4 ) * 3009;
-
-            THREE.AnimationHandler.update( clock.getDelta() );
-
-            renderer.render( scene, camera );
-
+        for ( var i = 0; i < character.numSkins; i ++ ) {
+            skinGui.add( skinConfig, character.skins[ i ].name );
         }
+        skinGui.open();
+    }
+    function setupMorphsGUI() {
+        var morphGui = gui.addFolder( "Morphs" );
+        morphConfig = {
+        };
+        var morphCallback = function( index ) {
+            return function () {
+                character.updateMorphs( morphConfig );
+            }
+        };
+        for ( var i = 0; i < character.numMorphs; i ++ ) {
+            var morphName = character.morphs[ i ];
+            morphConfig[ morphName ] = 0;
+        }
+        for ( var i = 0; i < character.numMorphs; i ++ ) {
+            morphGui.add( morphConfig, character.morphs[ i ] ).min( 0 ).max( 100 ).onChange( morphCallback( i ) );
+        }
+        morphGui.open();
+    }
+    function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+    function onDocumentMouseMove( event ) {
+        mouseX = ( event.clientX - windowHalfX ) * 10;
+        mouseY = ( event.clientY - windowHalfY ) * 10;
+    }
+    //
+    function animate() {
+        requestAnimationFrame( animate );
+        controls.update();
+        render();
+    }
+    function render() {
+        var delta = 0.75 * clock.getDelta();
+        // update skinning
+        character.mixer.update( delta );
+        renderer.render( scene, camera );
+    }
 });
