@@ -1,0 +1,24 @@
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#claims" aria-controls="claims" role="tab" data-toggle="tab">Claims</a></li>
+    <li role="presentation"><a href="#subscriber" aria-controls="subscriber" role="tab" data-toggle="tab">Subscriber</a></li>
+    <li role="presentation"><a href="#patient" aria-controls="patient" role="tab" data-toggle="tab">Patient</a></li>
+    <li role="presentation"><a href="#dentist" aria-controls="dentist" role="tab" data-toggle="tab">Dentist</a></li>
+    <li role="presentation"><a href="#procedures" aria-controls="procedures" role="tab" data-toggle="tab">Procedures</a></li>
+    <li role="presentation"><a href="#spend_totals" aria-controls="spend_totals" role="tab" data-toggle="tab">Spend Totals</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="claims">
+        <div data-bind="component: { name: 'claims_form', params: { data: claims_data } }"></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="subscriber">...</div>
+    <div role="tabpanel" class="tab-pane" id="dentist">...</div>
+    <div role="tabpanel" class="tab-pane" id="procedures">...</div>
+    <div role="tabpanel" class="tab-pane" id="spend_totals">...</div>
+  </div>
+
+</div>

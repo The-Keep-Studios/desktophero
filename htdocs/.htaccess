@@ -1,0 +1,4 @@
+#development only, delete this file and use a correct vhost config when live
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

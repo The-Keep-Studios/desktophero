@@ -1,0 +1,20 @@
+{
+    "development" : {
+        "database" : {
+            "dsn" : "mysql:host=127.0.0.1;port=8889;dbname=hero",
+            "username" : "hero",
+            "password" : "hero"
+        },
+        "salt" : "password",
+        "session_expires" : "24 hours",
+        "resources" : {
+           "/foo" : [ "editor","admin" ]
+        }
+    },
+    "production" : {
+        "database": {
+            "dbname": "hero"
+        }
+
+    }
+}

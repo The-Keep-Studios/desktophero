@@ -1,0 +1,60 @@
+<form role="form" data-bind='submit: handleSubmit' class="form">
+    <div class="form-group">
+    <table class="table-responsive table table-hover">
+       <thead>
+        <tr >
+            <th >Person #</th>
+            <th >Social Sec</th>
+            <th >First</th>
+            <th >Last</th>
+            <th >Dental Effective</th>
+            <th >Dental Expires</th>
+            <th >Employer</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: subscribers, visible: subscribers().length > 0" class="panel">
+        <!-- for loop -->
+        <tr data-bind="click: setIsSelected, css: {active: isSelected}">
+            <td data-bind="text: person_num" class="filterable-cell" ></td>
+            <td data-bind="text: social_sec" class="filterable-cell"></td>
+            <td data-bind="text: firstname" class="filterable-cell"></td>
+            <td data-bind="text: lastname" class="filterable-cell"></td>
+            <td data-bind="text: dental_effective" class="filterable-cell"></td>
+            <td data-bind="text: dental_expires" class="filterable-cell"></td>
+            <td data-bind="text: employer" class="filterable-cell"></td>
+        </tr>
+        <!-- end for loop -->
+    </tbody>
+    </table>
+    </div>
+
+    <div class="form-group">
+        <div class="form-control">Subscriber Actions: <select data-bind="options: subscriberActions, selectedOptions: selectedSubAction"></select> </div>
+    </div>
+    <div class="form-group">
+        <div class="form-control">Actions: <select data-bind="options: actions"></select> </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+<div class="modal" id="personinfo" data-bind="with: openModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" data-bind="text: modal_title"></h4>
+      </div>
+      <div class="modal-body" >
+          <!-- this allows for dynamic component loading based on the value of modal_name -->
+          <div data-bind="component: {name: modal_name, params: { data: person }}"</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
