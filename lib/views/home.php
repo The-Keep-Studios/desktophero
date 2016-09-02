@@ -2,12 +2,13 @@
   <div class="container">
     <h1 class="display-3">Desktop Hero - 3D Yourself.</h1>
     <h2 class="m-b-lg">Craft your character for your personal journey, <em>absolutely free</em>, with <a href="/editor/" class="jumbolink">Desktop Hero</a>.</h2>
-    <a class="btn btn-secondary-outline m-b-md" href="#" role="button"><span class="icon-sketch"></span>Download your .STL or .OBJ and own it forever.</a>
+    <a class="btn btn-secondary-outline m-b-md" href="/editor/" role="button"><span class="icon-sketch"></span>Download your .STL or .OBJ and own it forever.</a>
     <ul class="list-inline social-share">
-      <li><a class="nav-link" href="#"><span class="icon-twitter"></span></a></li>
-      <li><a class="nav-link" href="#"><span class="icon-facebook"></span></a></li>
+      <!--TODO: Change twitter icon to kickstarter icon -->
+      <li><a class="nav-link" href="https://www.kickstarter.com/projects/263291121/desktophero-free-3d-printable-character-maker/description"><span class="icon-twitter"></span></a></li>
+      <li><a class="nav-link" href="https://www.facebook.com/desktophero3D"><span class="icon-facebook"></span></a></li>
       <!-- TODO: upgrade the github icon to something prettier and probably SVG -->
-      <li><a class="nav-link" href="#"><img src="/img/github-256.png" width="20px"></a></li>
+      <li><a class="nav-link" href="https://github.com/stockto2/desktophero"><img src="/img/github-256.png" width="20px"></a></li>
     </ul>
   </div>
 </header>
@@ -15,7 +16,7 @@
   <div class="container">
     <h3 class="wp wp-1">Make, Outfit, Pose, and Print.</h3>
     <p class="lead wp wp-2">Craft memorable, emotive characters with our range of beautiful models.</p>
-    <img src="img/mock.png" alt="iPad mock" class="img-responsive wp wp-3">
+    <img src="img/sample1.png" alt="iPad mock" class="img-responsive wp wp-3 center-block">
   </div>
 </section>
 <section class="section-features text-center">
@@ -56,10 +57,12 @@
 </section>
 <section id='about' class="section-video bg-inverse text-center wp wp-4">
   <h3 class="sr-only">Video</h3>
-  <video id="demo_video" class="video-js vjs-default-skin vjs-big-play-centered" controls poster="img/video-poster.jpg" data-setup='{}'>
-    <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
-    <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
+  <video id="demo_video" class="video-js vjs-default-skin vjs-big-play-centered" controls poster="img/video-poster.png" data-setup='{}'>
+    <source src="https://ksr-video.imgix.net/projects/2480422/video-677362-h264_high.mp4" type='video/mp4'>
+    <source src="https://ksr-video.imgix.net/projects/2480422/video-677362-h264_high.webm" type='video/webm'>
   </video>
+
+
 </section>
 <section id='carousel' class="section-pricing bg-faded text-center">
   <div class="container">
@@ -158,14 +161,12 @@
     <h3 class="text-center">Who will you create today?</h3>
     <div class="row p-y-lg">
       <div class="col-md-5">
-        <p class="wp wp-7">
-        	Logged In: <?php echo $loggedin ?> </br>
-			Variable set in the route: <?php echo $variable ?> </br>
-			Variable calculated in the page: <?php echo rand(0,100); ?>
-        </p>
+        <p class="wp wp-7">We are aware that similar services do exist out there on the internet. Here are the things that make DesktopHero stand out!</p>
+        <p class="wp wp-7">It's Free and it's Yours. Once you design a character, you can download the file for free, then use it however you want - including commercially.</p>
       </div>
       <div class="col-md-5 col-md-offset-2 separator-x">
-        <p class="wp wp-8">A posuere donec senectus suspendisse bibendum magna ridiculus a justo orci parturient suspendisse ad rhoncus cursus ut parturient viverra elit aliquam ultrices est sem. Tellus nam ad fermentum ac enim est duis facilisis congue a lacus adipiscing consequat risus consectetur scelerisque integer suspendisse a mus integer elit massa ut.</p>
+        <p class="wp wp-8">Make as Many as You Want. There is no limit to how many characters you can download! That means you can make multiple versions of a character with different weapons or clothing, or print an entire party of different characters! It's still free.</p>
+        <p class="wp wp-8">It's Easy to Use. We've tested this on middle schoolers and adults alike - no artistic or 3d modeling skills required. Just use the buttons and sliders in the app to load assets and poses designed by our artists.</p>
       </div>
     </div>
   </div>
@@ -177,16 +178,17 @@
       <div class="row">
         <div class="col-md-6 p-r-0">
           <figure class="has-light-mask m-b-0 image-effect">
-            <img src="https://images.unsplash.com/photo-1442328166075-47fe7153c128?q=80&fm=jpg&w=1080&fit=max" alt="Article thumbnail" class="img-responsive">
+            <!--img src="https://images.unsplash.com/photo-1442328166075-47fe7153c128?q=80&fm=jpg&w=1080&fit=max" alt="Article thumbnail" class="img-responsive"-->
+            <img src="/img/artist1.jpg" alt="Article thumbnail" class="img-responsive">
           </figure>
         </div>
         <div class="col-md-6 p-l-0">
           <article class="center-block">
-            <span class="label label-info">Featured Model Designer</span>
+            <span class="label label-info">Featured Designer: Larry Dixon</span>
             <br>
-            <h5><a href="#">This guy makes great models lorem ipsum <span class="icon-arrow-right"></span></a></h5>
+            <h5><a href="http://www.gryphonking.com/">Gaming legend, designer and artist Larry Dixon has stepped in and volunteered to do a number of designs for us! <span class="icon-arrow-right"></span></a></h5>
             <p class="m-b-0">
-              <a href="#"><span class="label label-default text-uppercase"><span class="icon-tag"></span> See his other work</span></a>
+              <a href="http://www.gryphonking.com/"><span class="label label-default text-uppercase"><span class="icon-tag"></span> See his other work</span></a>
             </p>
           </article>
         </div>
