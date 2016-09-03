@@ -16,6 +16,11 @@
   <div class="container">
     <h3 class="wp wp-1">Make, Outfit, Pose, and Print.</h3>
     <p class="lead wp wp-2">Craft memorable, emotive characters with our range of beautiful models.</p>
+    <p> Have you ever made up a character in your head, and wished you could make that character real? Physically hold them in your hand?</p>
+    <p>DesktopHero is a web app that lets you easily design your own characters for 3D printing. You start with a basic 3D figure - then add armor, clothes, hair, and weapons, crafting your hero onscreen.</p>
+    <p>When you're done, you can download the file and get it 3D printed into a real, physical object - to paint, to hold, to use in games... to keep on your desk and stare at while you should be working... ;-) </p>
+
+DesktopHero lets you turn your ideas into a physical reality, and we think you'll love it
     <img src="img/sample1.png" alt="iPad mock" class="img-responsive wp wp-3 center-block">
   </div>
 </section>
@@ -70,28 +75,28 @@
     <div id="carousel-gallery" class="carousel slide" data-ride="carousel">
 	  <div class="carousel-inner" role="listbox">
 	    <div class="carousel-item active">
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-1.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-2.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-3.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-4.png" alt="First slide" class='col-xs-3'>
 	    </div>
 	    <div class="carousel-item">
-	    	<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
+	    <img src="/img/gallery/fake-gallery-5.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-1.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-2.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-3.png" alt="First slide" class='col-xs-3'>
 	    </div>
 	    <div class="carousel-item">
-	      	<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
+	    <img src="/img/gallery/fake-gallery-4.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-5.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-1.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-2.png" alt="First slide" class='col-xs-3'>
 	    </div>
 	    <div class="carousel-item">
-	      	<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
-			<img src="http://placehold.it/300x500" alt="First slide" class='col-xs-3'>
+	    <img src="/img/gallery/fake-gallery-3.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-4.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-5.png" alt="First slide" class='col-xs-3'>
+			<img src="/img/gallery/fake-gallery-1.png" alt="First slide" class='col-xs-3'>
 	    </div>
 	  </div>
 	  <a class="left carousel-control" href="#carousel-gallery" role="button" data-slide="prev">
