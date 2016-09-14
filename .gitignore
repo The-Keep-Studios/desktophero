@@ -23,3 +23,9 @@ Thumbs.db
 venv
 node_modules
 .sass-cache
+
+# Local files
+local
+
+# Configuration files
+config
