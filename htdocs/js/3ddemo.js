@@ -7,6 +7,7 @@ $(document).ready(function(){
 		var spotLight, hemi;
 		var SCREEN_WIDTH, SCREEN_HEIGHT;
 		var loader, model;
+		var rotationSet = false;
 		
 
 		function init(){
@@ -58,8 +59,7 @@ $(document).ready(function(){
 				
 				this.scene = function(){
 					console.log(scene);
-				};
-						   
+				};		   
 			}
 			
 			//add some nice lighting
@@ -86,7 +86,7 @@ $(document).ready(function(){
 			
 			/*add loader call add model function*/
 			loader = new THREE.JSONLoader();
-			loader.load( '/test/models/human.js', addModel );
+			loader.load( '/test/models/human2.js', addModel );
 			
 			/*adds controls to scene*/
 			datGUI = new dat.GUI();
@@ -180,21 +180,26 @@ $(document).ready(function(){
 			spotLight.position.x = guiControls.lightX;
 			spotLight.position.y = guiControls.lightY;
 			spotLight.position.z = guiControls.lightZ;
-			
-			scene.traverse(function(child){
-				if (child instanceof THREE.SkinnedMesh){  
-					
-					child.rotation.y += .01;
-					
-					child.skeleton.bones[0].rotation.z = guiControls.Bone_0;
-					child.skeleton.bones[1].rotation.z = guiControls.Bone_1;
-					child.skeleton.bones[2].rotation.z = guiControls.Bone_2;
-					child.skeleton.bones[3].rotation.z = guiControls.Bone_3;                
-				}
-				else if  (child instanceof THREE.SkeletonHelper){
-					child.update();
-				}
-			}); 
+
+			if (!rotationSet){
+				scene.traverse(function(child){
+					if (child instanceof THREE.SkinnedMesh){  
+						for (var j = 0; j < child.skeleton.bones.length; j++){
+							child.skeleton.bones[j].rotation.z = 0.1
+						}
+						rotationSet = true;
+						/*child.rotation.y += .01;
+						
+						child.skeleton.bones[0].rotation.z = guiControls.Bone_0;
+						child.skeleton.bones[1].rotation.z = guiControls.Bone_1;
+						child.skeleton.bones[2].rotation.z = guiControls.Bone_2;
+						child.skeleton.bones[3].rotation.z = guiControls.Bone_3;  */              
+					}
+					else if  (child instanceof THREE.SkeletonHelper){
+						child.update();
+					}
+				});
+			}
 
 		}
 		
@@ -207,6 +212,7 @@ $(document).ready(function(){
     
     init();
     animate();
+    
     
     $(window).resize(function(){
         SCREEN_WIDTH = window.innerWidth;
