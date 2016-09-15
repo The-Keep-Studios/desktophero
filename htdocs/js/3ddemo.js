@@ -85,7 +85,7 @@ function readyFunction(){
 		
 		/*add loader call add model function*/
 		loader = new THREE.JSONLoader();
-		loader.load( '/test/models/human.js', addModel );
+		loader.load( '/test/models/human3.js', addModel );
 		
 		/*adds controls to scene*/
 		datGUI = new dat.GUI();
@@ -215,19 +215,33 @@ function readyFunction(){
     });	
 
     window.poseModel = function(){
+    	pose = getTestPose()
+    	console.log(pose)
     	scene.traverse(function(child){
 			if (child instanceof THREE.SkinnedMesh){
 				for (var j = 0; j < child.skeleton.bones.length; j++){
-					child.skeleton.bones[j].rotation.x = Math.random() -.5;
-					child.skeleton.bones[j].rotation.y = Math.random() -.5;
+					var bone = child.skeleton.bones[j]
+					// Todo: Have the blender script store bones as <name>:<quat> entries in a dictionary to avoid this loop.
+					for (var i = 0; i < pose.bones.length; i++){
+						if (bone.name == pose.bones[i].bone_name){
+							//bone.use_quaternion = false
+							bone.rotation.x = pose.bones[i].rotation[0];
+							bone.rotation.z = pose.bones[i].rotation[1];
+							bone.rotation.y = pose.bones[i].rotation[2];
+							console.log(bone.name + ": ")
+							console.log(bone.rotation)
+							break;
+						}
+					}
 				}
-				
-				/*child.skeleton.bones[0].rotation.z = guiControls.Bone_0;
-				child.skeleton.bones[1].rotation.z = guiControls.Bone_1;
-				child.skeleton.bones[2].rotation.z = guiControls.Bone_2;
-				child.skeleton.bones[3].rotation.z = guiControls.Bone_3;  */              
 			}
 		});
+    }
+
+    function getTestPose(){
+    	return JSON.parse(
+    	'{"pose_name":"test", "bones":[{"bone_name":"Bone", "rotation":[0.0, -0.0, 0.0]}, {"bone_name":"Bone.001", "rotation":[-0.5169146656990051, 2.3667515091307066e-15, -1.5015154003234377e-15]}, {"bone_name":"Bone.002", "rotation":[-0.38898542523384094, -8.905615800358646e-09, -4.5210114762994635e-08]}, {"bone_name":"Bone.003", "rotation":[-0.46276766061782837, 1.2870769395065132e-15, 1.5151210787969467e-15]}, {"bone_name":"Bone.004", "rotation":[-0.7267451882362366, -6.508269765061431e-16, -8.131977926597537e-15]}, {"bone_name":"Bone.005", "rotation":[-0.034132782369852066, -1.346892237663269, 0.033223312348127365]}, {"bone_name":"Bone.006", "rotation":[0.0, -0.0, 0.0]}, {"bone_name":"Bone.007", "rotation":[0.0, -0.0, 0.0]}, {"bone_name":"Bone.008", "rotation":[0.03229135274887085, -1.8860628604888916, -0.00625944696366787]}, {"bone_name":"Bone.009", "rotation":[0.0, -0.0, 0.0]}, {"bone_name":"Bone.010", "rotation":[0.0, -0.0, 0.0]}, {"bone_name":"Bone.011", "rotation":[-1.1781902313232422, -5.2043148457414645e-08, -7.788023737020922e-08]}, {"bone_name":"Bone.012", "rotation":[-0.9935380220413208, -1.3527398756707498e-08, -2.497913342836e-08]}, {"bone_name":"Bone.013", "rotation":[-1.1429895162582397, 0.01410286221653223, -0.010143972933292389]}, {"bone_name":"Bone.014", "rotation":[-1.6192706823349, -3.9927246689330786e-05, -1.51184349306277e-05]}, {"bone_name":"Bone.017", "rotation":[-1.251051664352417, -3.201615618309006e-05, 1.672415601206012e-05]}, {"bone_name":"Bone.018", "rotation":[-0.5709238052368164, -1.7374009985360317e-05, 1.307887305301847e-05]}, {"bone_name":"Bone.015", "rotation":[0.9189460873603821, 1.0137181050140498e-07, -2.170802417822415e-07]}, {"bone_name":"Bone.016", "rotation":[0.6754739284515381, -1.902861335167927e-08, 5.472164232855903e-08]}, {"bone_name":"Bone.019", "rotation":[0.6843975186347961, -1.811793204353762e-08, 5.583206075243652e-08]}, {"bone_name":"Bone.020", "rotation":[0.483955055475235, 1.734193588731614e-08, -7.02543445640913e-08]}]}'
+    	);
     }
 }
 
